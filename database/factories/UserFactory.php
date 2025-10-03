@@ -20,7 +20,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'age' => fake()->numberBetween(18, 65),
             'location' => fake()->city() . ', ' . fake()->stateAbbr(),
-            'image' => 'https://picsum.photos/400/600?random=' . fake()->numberBetween(1, 1000),
+            // Remove image from factory since we now use UserImage model
         ];
     }
 }

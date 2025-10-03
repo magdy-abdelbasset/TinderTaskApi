@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\UserLiked;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LikeResource;
 use App\Models\Like;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -135,6 +137,10 @@ class LikeController extends Controller
                 'from_user_id' => $request->from_user_id,
                 'to_user_id' => $request->to_user_id,
             ]);
+
+            // Dispatch event when user gets liked
+            $toUser = User::find($request->to_user_id);
+            UserLiked::dispatch($toUser, $like);
 
             return response()->json(new LikeResource($like->load(['fromUser.images', 'toUser.images'])), 201);
         } catch (\Exception $e) {

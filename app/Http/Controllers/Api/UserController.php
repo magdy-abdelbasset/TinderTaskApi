@@ -32,7 +32,6 @@ class UserController extends Controller
      *                     @OA\Property(property="name", type="string", example="John Doe"),
      *                     @OA\Property(property="age", type="integer", example=25),
      *                     @OA\Property(property="location", type="string", example="New York, NY"),
-     *                     @OA\Property(property="image", type="string", example="https://picsum.photos/400/600?random=123"),
      *                     @OA\Property(property="images", type="array",
      *                         @OA\Items(
      *                             @OA\Property(property="id", type="integer", example=1),

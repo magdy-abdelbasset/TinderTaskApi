@@ -22,12 +22,7 @@ class UserResource extends JsonResource
             'image' => $this->image, // Keep for backward compatibility
             'images' => $this->whenLoaded('images', function () {
                 return $this->images->map(function ($image) {
-                    return [
-                        'id' => $image->id,
-                        'image_url' => $image->image_url,
-                        'order' => $image->order,
-                        'is_primary' => $image->is_primary,
-                    ];
+                    return $image->image_url ;
                 });
             }),
             'primary_image' => $this->whenLoaded('images', function () {
