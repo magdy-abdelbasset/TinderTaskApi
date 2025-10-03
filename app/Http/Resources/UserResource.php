@@ -19,7 +19,6 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'age' => $this->age,
             'location' => $this->location,
-            'image' => $this->image, // Keep for backward compatibility
             'images' => $this->whenLoaded('images', function () {
                 return $this->images->map(function ($image) {
                     return $image->image_url ;

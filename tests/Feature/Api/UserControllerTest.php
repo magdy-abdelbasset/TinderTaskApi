@@ -27,15 +27,7 @@ class UserControllerTest extends TestCase
                         'name',
                         'age',
                         'location',
-                        'image',
-                        'images' => [
-                            '*' => [
-                                'id',
-                                'image_url',
-                                'order',
-                                'is_primary',
-                            ],
-                        ],
+                        'images',
                         'primary_image',
                         'created_at',
                         'updated_at',

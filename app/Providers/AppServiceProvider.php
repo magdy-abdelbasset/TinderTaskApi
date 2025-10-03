@@ -20,9 +20,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Register event listeners
-        \Illuminate\Support\Facades\Event::listen(
-            \App\Events\UserLiked::class,
-            \App\Listeners\CheckPopularUser::class,
-        );
+        // \Illuminate\Support\Facades\Event::listen(
+        //     \App\Events\UserLiked::class,
+        //     \App\Listeners\CheckPopularUser::class,
+        // );
     }
 }

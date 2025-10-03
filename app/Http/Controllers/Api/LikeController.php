@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\UserLiked;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RemoveLikeRequest;
+use App\Http\Requests\StoreLikeRequest;
 use App\Http\Resources\LikeResource;
 use App\Models\Like;
 use App\Models\User;
@@ -125,13 +127,8 @@ class LikeController extends Controller
      *     )
      * )
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreLikeRequest $request): JsonResponse
     {
-        $request->validate([
-            'from_user_id' => 'nullable|exists:users,id',
-            'to_user_id' => 'required|exists:users,id',
-        ]);
-
         try {
             $like = Like::create([
                 'from_user_id' => $request->from_user_id,
@@ -203,13 +200,8 @@ class LikeController extends Controller
      *     )
      * )
      */
-    public function removeLike(Request $request): JsonResponse
+    public function removeLike(RemoveLikeRequest $request): JsonResponse
     {
-        $request->validate([
-            'from_user_id' => 'nullable|exists:users,id',
-            'to_user_id' => 'required|exists:users,id',
-        ]);
-
         $like = Like::where('from_user_id', $request->from_user_id)
                    ->where('to_user_id', $request->to_user_id)
                    ->first();

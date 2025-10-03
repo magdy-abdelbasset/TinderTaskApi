@@ -20,7 +20,6 @@ class User extends Model
         'name',
         'age',
         'location',
-        'image', // Keep for backward compatibility
     ];
 
     /**

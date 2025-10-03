@@ -430,9 +430,49 @@
                                             }
                                         },
                                         "links": {
+                                            "properties": {
+                                                "current": {
+                                                    "type": "string",
+                                                    "example": "http://yourapp.com/api/users?page=5"
+                                                },
+                                                "previous": {
+                                                    "type": "string",
+                                                    "example": "http://yourapp.com/api/users?page=4"
+                                                },
+                                                "next": {
+                                                    "type": "string",
+                                                    "example": "http://yourapp.com/api/users?page=6"
+                                                },
+                                                "first": {
+                                                    "type": "string",
+                                                    "example": "http://yourapp.com/api/users?page=1"
+                                                },
+                                                "last": {
+                                                    "type": "string",
+                                                    "example": "http://yourapp.com/api/users?page=10"
+                                                }
+                                            },
                                             "type": "object"
                                         },
                                         "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 10
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 150
+                                                }
+                                            },
                                             "type": "object"
                                         }
                                     },
