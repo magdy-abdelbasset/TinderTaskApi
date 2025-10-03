@@ -252,6 +252,95 @@
                 }
             }
         },
+        "/api/likes/remove": {
+            "delete": {
+                "tags": [
+                    "Likes"
+                ],
+                "summary": "Remove a like between users",
+                "description": "Remove a like from one user to another based on user IDs",
+                "operationId": "d09459f98e22e80d15bc2b18518db506",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "to_user_id"
+                                ],
+                                "properties": {
+                                    "from_user_id": {
+                                        "description": "ID of user who gave the like (null for anonymous)",
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "to_user_id": {
+                                        "description": "ID of user who received the like",
+                                        "type": "integer",
+                                        "example": 2
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Like removed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Like removed successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Like not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Like not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -299,10 +388,6 @@
                                                     "location": {
                                                         "type": "string",
                                                         "example": "New York, NY"
-                                                    },
-                                                    "image": {
-                                                        "type": "string",
-                                                        "example": "https://picsum.photos/400/600?random=123"
                                                     },
                                                     "images": {
                                                         "type": "array",

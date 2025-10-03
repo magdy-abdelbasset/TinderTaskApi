@@ -166,6 +166,64 @@ class LikeController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *     path="/api/likes/remove",
+     *     tags={"Likes"},
+     *     summary="Remove a like between users",
+     *     description="Remove a like from one user to another based on user IDs",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"to_user_id"},
+     *             @OA\Property(property="from_user_id", type="integer", nullable=true, example=1, description="ID of user who gave the like (null for anonymous)"),
+     *             @OA\Property(property="to_user_id", type="integer", example=2, description="ID of user who received the like")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Like removed successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Like removed successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Like not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Like not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="The given data was invalid."),
+     *             @OA\Property(property="errors", type="object")
+     *         )
+     *     )
+     * )
+     */
+    public function removeLike(Request $request): JsonResponse
+    {
+        $request->validate([
+            'from_user_id' => 'nullable|exists:users,id',
+            'to_user_id' => 'required|exists:users,id',
+        ]);
+
+        $like = Like::where('from_user_id', $request->from_user_id)
+                   ->where('to_user_id', $request->to_user_id)
+                   ->first();
+
+        if (!$like) {
+            return response()->json(['error' => 'Like not found'], 404);
+        }
+
+        $like->delete();
+
+        return response()->json(['message' => 'Like removed successfully'], 200);
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
