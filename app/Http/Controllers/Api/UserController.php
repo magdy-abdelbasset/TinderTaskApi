@@ -45,8 +45,20 @@ class UserController extends Controller
      *                     @OA\Property(property="updated_at", type="string", format="date-time")
      *                 )
      *             ),
-     *             @OA\Property(property="links", type="object"),
-     *             @OA\Property(property="meta", type="object")
+     *             @OA\Property(property="links", type="object",
+     *                 @OA\Property(property="current", type="string", example="http://yourapp.com/api/users?page=5"),
+     *                 @OA\Property(property="previous", type="string", example="http://yourapp.com/api/users?page=4"),
+     *                 @OA\Property(property="next", type="string", example="http://yourapp.com/api/users?page=6"),
+     *                 @OA\Property(property="first", type="string", example="http://yourapp.com/api/users?page=1"),
+     *                 @OA\Property(property="last", type="string", example="http://yourapp.com/api/users?page=10"),
+     *             ),
+     *             @OA\Property(property="meta", type="object",
+     *                 @OA\Property(property="current_page", type="integer", example=5),
+     *                 @OA\Property(property="last_page", type="integer", example=10),
+     *                 @OA\Property(property="per_page", type="integer", example=15),
+     *                 @OA\Property(property="total", type="integer", example=150)
+     *                  
+     *             )
      *         )
      *     )
      * )
